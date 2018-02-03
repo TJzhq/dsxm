@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mapper.OrderMapper">
+
+
+	<insert useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+		id="save_order" parameterType="com.atguigu.bean.OBJ_T_MALL_ORDER">
+		insert into t_mall_order(
+		shhr,
+		zje,
+		jdh,
+		yh_id,
+		dzh_id,
+		dzh_mch
+		)
+
+		values(
+		#{shhr},
+		#{zje},
+		#{jdh},
+		#{yh_id},
+		#{dzh_id},
+		#{dzh_mch}
+		)
+	</insert>
+
+	<insert useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+		id="save_flow" parameterType="com.atguigu.bean.OBJ_T_MALL_FLOW">
+		insert into t_mall_flow(
+		psfsh,
+		yh_id,
+		dd_id,
+		mqdd,
+		mdd
+		)
+		values(
+		#{psfsh},
+		#{yh_id},
+		#{dd_id},
+		#{mqdd},
+		#{mdd}
+		)
+	</insert>
+
+	<insert id="save_info" parameterType="com.atguigu.bean.T_MALL_ORDER_INFO">
+		insert into
+		t_mall_order_info(
+		dd_id,
+		sku_id,
+		sku_mch,
+		shp_tp,
+		sku_jg,
+		sku_shl,
+		sku_kcdz,
+		flow_id,
+		gwch_id
+		)
+		values(
+			#{dd_id},
+			#{sku_id},
+			#{sku_mch},
+			#{shp_tp},
+			#{sku_jg},
+			#{sku_shl},
+			#{sku_kcdz},
+			#{flow_id},
+			#{gwch_id}
+			)
+	</insert>
+
+	<delete id="delete_shoppingCart" parameterType="List">
+		delete from t_mall_shoppingcar where id in
+		<foreach collection="list" item="gwc_id" separator="," open="("
+			close=")">
+			#{gwc_id}
+		</foreach>
+	</delete>
+
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mapper.CartMapper">
+	<!-- <insert id="insert" parameterType="Map">
+	
+	insert into t_mall_product_image(shp_id,url) values
+	<foreach collection="list_image" item="image" separator=",">
+		(#{spu_id},#{image})
+	</foreach>
+	</insert> -->
+	
+	<!-- List<T_MALL_SHOPPINGCAR> getcartBYyh_id(int yh_id);-->
+	<select id="getcartBYyh_id" resultType="com.atguigu.bean.T_MALL_SHOPPINGCAR" parameterType="int">
+		select *from T_MALL_SHOPPINGCAR where yh_id=#{yh_id}
+	</select>
+	<!--void updateTJSHL(int i);-->
+	<update id="updateTJSHL" parameterType="Map">
+	<!-- UPDATE 表名称  set 字段名1 = 新值,字段名2 = 新值 WHERE 条件; -->
+		update T_MALL_SHOPPINGCAR set tjshl = #{tjshl} where sku_id=#{sku_id}
+	</update>
+	<!--void insertCart(T_MALL_SHOPPINGCAR cart); -->
+	<insert id="insertCart">
+	insert into 
+	T_MALL_SHOPPINGCAR(
+		sku_mch,
+		sku_jg,
+		tjshl,
+		hj,
+		yh_id,
+		shp_id,
+		sku_id,
+		shp_tp,
+		kcdz
+	)values(
+		#{sku_mch},
+		#{sku_jg},
+		#{tjshl},
+		#{hj},
+		#{yh_id},
+		#{shp_id},
+		#{sku_id},
+		#{shp_tp},
+		#{kcdz}
+	)
+	
+		
+	</insert>
+	
+	<!-- void updatecart(T_MALL_SHOPPINGCAR t_MALL_SHOPPINGCAR); -->
+	
+	<update id="updatecart" parameterType="com.atguigu.bean.T_MALL_SHOPPINGCAR">
+		update t_mall_shoppingCar
+		<set>
+			<if test="tjshl!=0">
+				tjshl = #{tjshl},
+			</if>
+			<if test="hj!=0">
+				hj = #{hj},
+			</if>
+			<if test="shfxz!=null and shfxz!=''">
+				shfxz = #{shfxz},
+			</if>
+		</set>
+		where sku_id = #{sku_id}
+	</update>
+</mapper>

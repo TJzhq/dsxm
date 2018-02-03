@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mapper.SpuImageMapper">
+	<insert id="insert" parameterType="Map">
+	
+	insert into t_mall_product_image(shp_id,url) values
+	<foreach collection="list_image" item="image" separator=",">
+		(#{spu_id},#{image})
+	</foreach>
+	</insert>
+</mapper>
